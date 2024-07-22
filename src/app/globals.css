@@ -37,3 +37,11 @@ body {
     text-wrap: balance;
   }
 }
+
+input,
+textarea {
+  background-color: transparent;
+  border: solid #777 2px;
+  padding: 3px 6px;
+  border-radius: 0.5rem;
+}
