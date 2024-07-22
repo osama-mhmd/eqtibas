@@ -10,20 +10,26 @@
 
 @media (prefers-color-scheme: dark) { */
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  --foreground-rgb: #fff;
+  --background-rgb: #111;
 }
 /* } */
 
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #222;
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground-rgb);
+  min-height: 100vh;
+  background: var(--background-rgb);
 }
 
 @layer utilities {

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const ibm = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
 
 export const metadata: Metadata = {
-  title: "إقتباس",
+  title: "اقتباس | الصفحة الرئيسية",
   description: "...",
 };
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={inter.className}>{children}</body>
+      <body className={ibm.className}>{children}</body>
     </html>
   );
 }
