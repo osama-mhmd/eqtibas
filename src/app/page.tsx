@@ -11,11 +11,16 @@ type Params = {
 export default function Home({ searchParams }: { searchParams: Params }) {
   const [quote, setQuote] = useState("");
 
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const quoteImage = useRef<HTMLParagraphElement>(null);
+
+  const willNotChangeClasses =
+    "bg-purple-950 p-4 flex text-center justify-center items-center";
 
   const downloadImage = async () => {
-    if (!paragraphRef.current) return;
-    const canvas = await html2canvas(paragraphRef.current);
+    if (!quoteImage.current) return;
+    let image = quoteImage.current.cloneNode() as HTMLDivElement;
+    image.className = "w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
+    const canvas = await html2canvas(image);
     const link = document.createElement("a");
     link.download = "paragraph-image.png";
     link.href = canvas.toDataURL("image/png");
@@ -44,8 +49,8 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div
-              ref={paragraphRef}
-              className="bg-purple-950 w-[500px] h-[300px] text-wrap p-4 flex justify-center items-center"
+              ref={quoteImage}
+              className={"w-[440px] h-[380px] text-lg " + willNotChangeClasses}
             >
               {quote}
             </div>
