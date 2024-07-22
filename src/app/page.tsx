@@ -1,10 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import html2canvas from "html2canvas";
 
-export default function Home() {
+type Params = {
+  quote?: string;
+};
+
+export default function Home({ searchParams }: { searchParams: Params }) {
   const [quote, setQuote] = useState("");
-  const [owner, SetOwner] = useState(""); // Owner of quote
+
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+
+  const downloadImage = async () => {
+    if (!paragraphRef.current) return;
+    const canvas = await html2canvas(paragraphRef.current);
+    const link = document.createElement("a");
+    link.download = "paragraph-image.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+
+  useEffect(() => {
+    if (searchParams.quote) {
+      setQuote(searchParams.quote);
+      (document.getElementById("textarea") as HTMLTextAreaElement).value =
+        searchParams.quote;
+    }
+  }, []);
 
   return (
     <main>
@@ -14,11 +38,20 @@ export default function Home() {
           <div className="grid justify-center grid-cols-[repeat(1,minmax(300px,600px))] gap-4">
             <textarea
               onKeyUp={(e) => setQuote((e.target as HTMLTextAreaElement).value)}
+              id="textarea"
               placeholder="الاقتباس..."
             />
-            <input type="text" placeholder="صاحب المقولة..." />
           </div>
-          <div className="flex justify-center items-center m-12">{quote}</div>
+          <div className="flex flex-col justify-center items-center m-12 gap-6">
+            <div
+              ref={paragraphRef}
+              className="bg-purple-950 w-[500px] h-[300px] text-wrap p-4 flex justify-center items-center"
+            >
+              {quote}
+            </div>
+
+            <button onClick={downloadImage}>تحميل</button>
+          </div>
         </div>
       </section>
     </main>
