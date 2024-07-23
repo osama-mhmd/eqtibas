@@ -18,11 +18,17 @@ export default function Home({ searchParams }: { searchParams: Params }) {
 
   const downloadImage = async () => {
     if (!quoteImage.current) return;
-    let image = quoteImage.current.cloneNode() as HTMLDivElement;
-    image.className = "w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
-    const canvas = await html2canvas(image);
+
+    // The next four lines is written to enhance the resolution of the image;
+    let originalClasses = quoteImage.current.className;
+    quoteImage.current.className =
+      "w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
+    const canvas = await html2canvas(quoteImage.current);
+    quoteImage.current.className = originalClasses;
+
+    // Download
     const link = document.createElement("a");
-    link.download = "paragraph-image.png";
+    link.download = "eqtibas.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   };
