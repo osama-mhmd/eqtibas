@@ -4,6 +4,10 @@
 import { useState, useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 
+function $(query: string): HTMLDivElement | null {
+  return document.querySelector(query);
+}
+
 type Params = {
   quote?: string;
 };
@@ -11,20 +15,17 @@ type Params = {
 export default function Home({ searchParams }: { searchParams: Params }) {
   const [quote, setQuote] = useState("");
 
-  const quoteImage = useRef<HTMLParagraphElement>(null);
-
   const willNotChangeClasses =
     "bg-purple-950 p-4 flex text-center justify-center items-center";
 
   const downloadImage = async () => {
-    if (!quoteImage.current) return;
-
-    // The next four lines is written to enhance the resolution of the image;
-    let originalClasses = quoteImage.current.className;
-    quoteImage.current.className =
-      "w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
-    const canvas = await html2canvas(quoteImage.current);
-    quoteImage.current.className = originalClasses;
+    // The next five lines is written to enhance the resolution of the image;
+    let image = $("#image") as HTMLDivElement;
+    let ogClasses = $("#image")!.className;
+    image.className =
+      "leading-5 w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
+    $("#image")!.className = ogClasses;
+    const canvas = await html2canvas(image);
 
     // Download
     const link = document.createElement("a");
@@ -55,7 +56,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div
-              ref={quoteImage}
+              id="image"
               className={"w-[440px] h-[380px] text-lg " + willNotChangeClasses}
             >
               {quote}
