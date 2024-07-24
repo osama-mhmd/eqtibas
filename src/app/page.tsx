@@ -16,14 +16,15 @@ export default function Home({ searchParams }: { searchParams: Params }) {
   const [quote, setQuote] = useState("");
 
   const willNotChangeClasses =
-    "bg-purple-950 p-4 flex text-center justify-center items-center";
+    "bg-purple-950 text-white p-4 flex text-center justify-center items-center";
 
   const downloadImage = async () => {
     // The next five lines is written to enhance the resolution of the image;
     let image = $("#image") as HTMLDivElement;
     let ogClasses = $("#image")!.className;
     image.className =
-      "leading-5 w-[1320px] h-[1140px] text-6xl " + willNotChangeClasses;
+      "leading-5 w-[1320px] h-[1140px] text-7xl rounded-none " +
+      willNotChangeClasses;
     $("#image")!.className = ogClasses;
     const canvas = await html2canvas(image);
 
@@ -55,11 +56,16 @@ export default function Home({ searchParams }: { searchParams: Params }) {
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
-            <div
-              id="image"
-              className={"w-[440px] h-[380px] text-lg " + willNotChangeClasses}
-            >
-              {quote}
+            <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))]">
+              <div
+                id="image"
+                className={
+                  "w-[370px] sm:w-[440px] h-[352px] sm:h-[380px] text-lg rounded-md " +
+                  willNotChangeClasses
+                }
+              >
+                {quote}
+              </div>
             </div>
 
             <button onClick={downloadImage}>تحميل</button>

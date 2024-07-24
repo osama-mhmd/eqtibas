@@ -10,8 +10,25 @@
 
 @media (prefers-color-scheme: dark) { */
 :root {
-  --foreground-rgb: #fff;
-  --background-rgb: #111;
+  --background: 0 0% 100%;
+  --foreground: 224 71.4% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71.4% 4.1%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220.9 39.3% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 262.1 83.3% 57.8%;
 }
 /* } */
 
@@ -27,9 +44,9 @@
 }
 
 body {
-  color: var(--foreground-rgb);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
   min-height: 100vh;
-  background: var(--background-rgb);
 }
 
 @layer utilities {
@@ -39,13 +56,24 @@ body {
 }
 
 input,
-textarea,
-button {
+textarea {
   background-color: transparent;
-  border: solid #777 2px;
-  padding: 3px 6px;
+  border: solid 1px;
+  border-color: hsl(var(--border));
+  padding: 0.5rem;
   border-radius: 0.5rem;
 }
+input:focus,
+textarea:focus {
+  outline-color: hsl(var(--input));
+}
 button {
+  border-radius: 0.5rem;
   padding: 0.5rem 1rem;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transition: 0.3s all;
+}
+button:hover {
+  background-color: hsl(var(--primary) / 0.9);
 }
