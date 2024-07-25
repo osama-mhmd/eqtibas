@@ -23,7 +23,7 @@ const quotes = [
 export default function Gallery() {
   return (
     <section className="py-8">
-      <div className="container px-2 mx-auto grid gc">
+      <div className="container px-2 mx-auto grid gc justify-center">
         {quotes.map((quote, index) => {
           return (
             <a

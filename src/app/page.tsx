@@ -14,7 +14,7 @@ type Params = {
 };
 
 export default function Home({ searchParams }: { searchParams: Params }) {
-  const [quote, setQuote] = useState("");
+  const [quote, setQuote] = useState(searchParams.quote);
 
   const willNotChangeClasses =
     "bg-purple-950 text-white p-4 flex text-center justify-center items-center";
@@ -35,14 +35,6 @@ export default function Home({ searchParams }: { searchParams: Params }) {
     link.click();
   };
 
-  useEffect(() => {
-    if (searchParams.quote) {
-      setQuote(searchParams.quote);
-      (document.getElementById("textarea") as HTMLTextAreaElement).value =
-        searchParams.quote;
-    }
-  }, []);
-
   return (
     <main>
       <section className="mt-10">
@@ -53,6 +45,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
               onKeyUp={(e) => setQuote((e.target as HTMLTextAreaElement).value)}
               id="textarea"
               placeholder="الاقتباس..."
+              defaultValue={searchParams.quote}
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
@@ -75,7 +68,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
       </section>
       <Gallery />
       <footer>
-        <div className="py-10 container mx-auto px-2">
+        <div className="py-10 container mx-auto text-center px-2">
           <hr />
           <br />
           صنع بواسطة{" "}
