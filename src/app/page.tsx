@@ -23,8 +23,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
     let image = $("#image") as HTMLDivElement;
     let ogClasses = $("#image")!.className;
     image.className =
-      "leading-5 w-[1320px] h-[1140px] text-7xl rounded-none " +
-      willNotChangeClasses;
+      "leading-5 w-[1320px] h-[1140px] text-7xl " + willNotChangeClasses;
     $("#image")!.className = ogClasses;
     const canvas = await html2canvas(image);
 
@@ -60,7 +59,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
               <div
                 id="image"
                 className={
-                  "w-[370px] sm:w-[440px] h-[352px] sm:h-[380px] text-lg rounded-md " +
+                  "w-[370px] sm:w-[440px] h-[352px] sm:h-[380px] text-lg " +
                   willNotChangeClasses
                 }
               >
