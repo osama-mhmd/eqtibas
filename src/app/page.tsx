@@ -53,7 +53,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
               <div
                 id="image"
                 className={
-                  "w-[370px] sm:w-[440px] aspect-[22/19] text-lg " +
+                  "w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-lg " +
                   willNotChangeClasses
                 }
               >

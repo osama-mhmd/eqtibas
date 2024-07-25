@@ -23,13 +23,13 @@ const quotes = [
 export default function Gallery() {
   return (
     <section className="py-8">
-      <div className="container px-2 mx-auto grid gc justify-center">
+      <div className="container px-2 mx-auto grid gc justify-center gap-2">
         {quotes.map((quote, index) => {
           return (
             <a
               href={`/?quote=${quote.quote}`}
               key={`quote_${index}`}
-              className="bg-purple-950 me-4 mb-8 text-white rounded-md p-4 inline-flex text-center justify-center items-center aspect-[22/19] text-lg"
+              className="bg-purple-950 text-white rounded-md p-4 inline-flex text-center justify-center items-center aspect-[22/19] text-lg"
             >
               {quote.quote}
             </a>
