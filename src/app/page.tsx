@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
+import Gallery from "./gallery";
 
 function $(query: string): HTMLDivElement | null {
   return document.querySelector(query);
@@ -45,7 +46,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
   return (
     <main>
       <section className="mt-10">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-2">
           <h1 className="text-center text-4xl mb-6">اقتباس</h1>
           <div className="grid justify-center grid-cols-[repeat(1,minmax(300px,600px))] gap-4">
             <textarea
@@ -59,7 +60,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
               <div
                 id="image"
                 className={
-                  "w-[370px] sm:w-[440px] h-[352px] sm:h-[380px] text-lg " +
+                  "w-[370px] sm:w-[440px] aspect-[22/19] text-lg " +
                   willNotChangeClasses
                 }
               >
@@ -69,8 +70,24 @@ export default function Home({ searchParams }: { searchParams: Params }) {
 
             <button onClick={downloadImage}>تحميل</button>
           </div>
+          <hr />
         </div>
       </section>
+      <Gallery />
+      <footer>
+        <div className="py-10 container mx-auto px-2">
+          <hr />
+          <br />
+          صنع بواسطة{" "}
+          <a
+            className="underline text-blue-800"
+            href="https://os-mhmd.vercel.app"
+          >
+            أسامة محمد
+          </a>{" "}
+          - 2024
+        </div>
+      </footer>
     </main>
   );
 }

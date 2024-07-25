@@ -77,3 +77,7 @@ button {
 button:hover {
   background-color: hsl(var(--primary) / 0.9);
 }
+.gc {
+  /* Grid common */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
