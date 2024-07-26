@@ -9,11 +9,7 @@ import Canvas from "@/components/canvas";
 import { useRef, useState, useEffect } from "react";
 import Edit from "@/components/edit";
 
-type Params = {
-  quote?: string;
-};
-
-export default function Home({ searchParams }: { searchParams: Params }) {
+export default function Home() {
   const { quote, background } = useSelector((state) => (state as any).canvas);
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
@@ -43,7 +39,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
               }}
               id="textarea"
               placeholder="الاقتباس..."
-              defaultValue={searchParams.quote}
+              // defaultValue={quote} * need to be fixed
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
