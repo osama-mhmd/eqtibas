@@ -44,7 +44,12 @@ export default function Home() {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
-              <Canvas background={background} ref={canvasRef} quote={quote} />
+              <Canvas
+                background={background}
+                ref={canvasRef}
+                quote={quote}
+                theme="quotation"
+              />
               <span
                 className="absolute -top-8 left-0 cursor-pointer"
                 onClick={() => isEditingOrNot(true)}

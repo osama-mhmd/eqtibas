@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   quote: "",
   background: "default-background", // #111
+  theme: "no-effect",
 };
 
 const canvasSlice = createSlice({
@@ -14,6 +15,9 @@ const canvasSlice = createSlice({
     },
     changeBackground: (state, action) => {
       state.background = action.payload;
+    },
+    changeTheme: (state, action) => {
+      state.theme = action.payload;
     },
   },
 });
