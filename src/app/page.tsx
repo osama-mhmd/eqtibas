@@ -1,14 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import html2canvas from "html2canvas";
-import Gallery from "./gallery";
+import Gallery from "@/components/gallery";
 import { useDispatch, useSelector } from "react-redux";
 import { writeQuote } from "@/redux/slices/image";
-
-function $(query: string): HTMLDivElement | null {
-  return document.querySelector(query);
-}
+import Image from "@/components/image";
+import { useRef } from "react";
 
 type Params = {
   quote?: string;
@@ -16,11 +15,14 @@ type Params = {
 
 export default function Home({ searchParams }: { searchParams: Params }) {
   const { quote, background } = useSelector((state) => (state as any).image);
+  const imageRef = useRef(null);
+
   const dispatch = useDispatch();
 
   const downloadImage = async () => {
-    let image = $("#image") as HTMLDivElement;
-    const canvas = await html2canvas(image, { scale: 15 });
+    if (!imageRef.current) return;
+
+    const canvas = await html2canvas(imageRef.current, { scale: 15 });
 
     // Download
     const link = document.createElement("a");
@@ -46,12 +48,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
-              <div
-                id="image"
-                className="w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-lg bg-purple-950 text-white p-4 flex text-center justify-center items-center"
-              >
-                {quote}
-              </div>
+              <Image quote={quote} ref={imageRef} />
             </div>
 
             <button onClick={downloadImage}>تحميل</button>
