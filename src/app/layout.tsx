@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+import ReduxProvider from "@/redux/redux-provider";
 
 const ibm = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={ibm.className}>{children}</body>
+      <body className={ibm.className}>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }

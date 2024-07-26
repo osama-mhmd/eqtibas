@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import Gallery from "./gallery";
+import { useDispatch, useSelector } from "react-redux";
+import { writeQuote } from "@/redux/slices/image";
 
 function $(query: string): HTMLDivElement | null {
   return document.querySelector(query);
@@ -14,7 +15,8 @@ type Params = {
 };
 
 export default function Home({ searchParams }: { searchParams: Params }) {
-  const [quote, setQuote] = useState(searchParams.quote);
+  const { quote, background } = useSelector((state) => (state as any).image);
+  const dispatch = useDispatch();
 
   const willNotChangeClasses =
     "bg-purple-950 text-white p-4 flex text-center justify-center items-center";
@@ -42,14 +44,16 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           <h1 className="text-center text-4xl mb-6">اقتباس</h1>
           <div className="grid justify-center grid-cols-[repeat(1,minmax(300px,600px))] gap-4">
             <textarea
-              onKeyUp={(e) => setQuote((e.target as HTMLTextAreaElement).value)}
+              onKeyUp={(e) =>
+                dispatch(writeQuote((e.target as HTMLTextAreaElement).value))
+              }
               id="textarea"
               placeholder="الاقتباس..."
               defaultValue={searchParams.quote}
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
-            <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))]">
+            <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
               <div
                 id="image"
                 className={
