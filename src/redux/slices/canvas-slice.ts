@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   quote: "",
-  background: "bg-purple-950", // written in tailwind
+  background: "default-background", // #111
 };
 
 const canvasSlice = createSlice({
-  name: "image",
+  name: "canvas",
   initialState,
   reducers: {
     writeQuote: (state, action) => {
