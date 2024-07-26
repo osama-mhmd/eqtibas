@@ -18,17 +18,9 @@ export default function Home({ searchParams }: { searchParams: Params }) {
   const { quote, background } = useSelector((state) => (state as any).image);
   const dispatch = useDispatch();
 
-  const willNotChangeClasses =
-    "bg-purple-950 text-white p-4 flex text-center justify-center items-center";
-
   const downloadImage = async () => {
-    // The next five lines is written to enhance the resolution of the image;
     let image = $("#image") as HTMLDivElement;
-    let ogClasses = $("#image")!.className;
-    image.className =
-      "leading-5 w-[1320px] h-[1140px] text-7xl " + willNotChangeClasses;
-    $("#image")!.className = ogClasses;
-    const canvas = await html2canvas(image);
+    const canvas = await html2canvas(image, { scale: 15 });
 
     // Download
     const link = document.createElement("a");
@@ -56,10 +48,7 @@ export default function Home({ searchParams }: { searchParams: Params }) {
             <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
               <div
                 id="image"
-                className={
-                  "w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-lg " +
-                  willNotChangeClasses
-                }
+                className="w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-lg bg-purple-950 text-white p-4 flex text-center justify-center items-center"
               >
                 {quote}
               </div>
