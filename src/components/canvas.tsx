@@ -13,7 +13,7 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
       <div
         ref={ref}
         className={cn(
-          "w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-lg text-white p-4 flex text-center justify-center items-center",
+          "w-[370px] sm:w-[440px] h-[320px] sm:h-[380px] text-xl text-white p-8 flex text-center justify-center items-center",
           className,
           background
         )}
