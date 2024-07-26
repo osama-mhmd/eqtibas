@@ -1,29 +1,28 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import html2canvas from "html2canvas";
 import Gallery from "@/components/gallery";
 import { useDispatch, useSelector } from "react-redux";
-import { writeQuote } from "@/redux/slices/image";
-import Image from "@/components/image";
-import { useRef } from "react";
+import { writeQuote } from "@/redux/slices/canvas-slice";
+import Canvas from "@/components/canvas";
+import { useRef, useState, useEffect } from "react";
+import Edit from "@/components/edit";
 
 type Params = {
   quote?: string;
 };
 
 export default function Home({ searchParams }: { searchParams: Params }) {
-  const { quote, background } = useSelector((state) => (state as any).image);
-  const imageRef = useRef(null);
+  const { quote, background } = useSelector((state) => (state as any).canvas);
+  const canvasRef = useRef(null);
   const dispatch = useDispatch();
-
-  dispatch(writeQuote(searchParams.quote))
+  const [isEditing, isEditingOrNot] = useState(false);
 
   const downloadImage = async () => {
-    if (!imageRef.current) return;
+    if (!canvasRef.current) return;
 
-    const canvas = await html2canvas(imageRef.current, { scale: 15 });
+    const canvas = await html2canvas(canvasRef.current, { scale: 15 });
 
     // Download
     const link = document.createElement("a");
@@ -39,9 +38,9 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           <h1 className="text-center text-4xl mb-6">اقتباس</h1>
           <div className="grid justify-center grid-cols-[repeat(1,minmax(300px,600px))] gap-4">
             <textarea
-              onKeyUp={(e) =>
-                dispatch(writeQuote((e.target as HTMLTextAreaElement).value))
-              }
+              onKeyUp={(e) => {
+                dispatch(writeQuote((e.target as HTMLTextAreaElement).value));
+              }}
               id="textarea"
               placeholder="الاقتباس..."
               defaultValue={searchParams.quote}
@@ -49,8 +48,16 @@ export default function Home({ searchParams }: { searchParams: Params }) {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
-              <Image quote={quote} ref={imageRef} />
+              <Canvas background={background} ref={canvasRef} quote={quote} />
+              <span
+                className="absolute -top-8 left-0 cursor-pointer"
+                onClick={() => isEditingOrNot(true)}
+              >
+                تعديل
+              </span>
             </div>
+
+            {isEditing && <Edit closePanel={() => isEditingOrNot(false)} />}
 
             <button onClick={downloadImage}>تحميل</button>
           </div>

@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   quote: "",
-  background: "#111",
+  background: "bg-purple-950", // written in tailwind
 };
 
-const imageSlice = createSlice({
+const canvasSlice = createSlice({
   name: "image",
   initialState,
   reducers: {
@@ -18,6 +18,6 @@ const imageSlice = createSlice({
   },
 });
 
-export const { writeQuote, changeBackground } = imageSlice.actions;
+export const { writeQuote, changeBackground } = canvasSlice.actions;
 
-export default imageSlice.reducer;
+export default canvasSlice.reducer;
