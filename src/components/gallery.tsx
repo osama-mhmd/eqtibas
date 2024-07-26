@@ -1,4 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { changeBackground, writeQuote } from "@/redux/slices/canvas-slice";
+import Canvas from "./canvas";
 
 const quotes = [
   {
@@ -28,18 +33,24 @@ const quotes = [
 ];
 
 export default function Gallery() {
+  const dispatch = useDispatch();
+
   return (
     <section className="py-8">
       <div className="container px-2 mx-auto grid gc justify-center gap-2">
         {quotes.map((quote, index) => {
           return (
-            <Link
-              href={`/?quote=${quote.quote}`}
+            <Canvas
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                dispatch(writeQuote(quote.quote));
+                dispatch(changeBackground(quote.background));
+              }}
               key={`quote_${index}`}
-              className={`${quote.background} text-white rounded-md p-4 inline-flex text-center justify-center items-center aspect-[22/19] text-lg`}
-            >
-              {quote.quote}
-            </Link>
+              background={quote.background}
+              className={`${quote.background} rounded-md cursor-pointer aspect-[22/19] w-auto h-auto sm:h-auto sm:w-auto`} // overriding width and height props
+              quote={quote.quote}
+            />
           );
         })}
       </div>

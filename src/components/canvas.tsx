@@ -1,14 +1,14 @@
 import { cn } from "@/utils";
 import { forwardRef } from "react";
+import { type HTMLAttributes } from "react";
 
-type CanvasProps = {
+interface CanvasProps extends HTMLAttributes<HTMLDivElement> {
   quote: string;
-  className?: string;
   background: string;
-};
+}
 
 const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
-  ({ quote, className = "", background }, ref) => {
+  ({ quote, className = "", background, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -17,6 +17,7 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
           className,
           background
         )}
+        {...props}
       >
         {quote}
       </div>
