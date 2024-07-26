@@ -16,8 +16,9 @@ type Params = {
 export default function Home({ searchParams }: { searchParams: Params }) {
   const { quote, background } = useSelector((state) => (state as any).image);
   const imageRef = useRef(null);
-
   const dispatch = useDispatch();
+
+  dispatch(writeQuote(searchParams.quote))
 
   const downloadImage = async () => {
     if (!imageRef.current) return;
