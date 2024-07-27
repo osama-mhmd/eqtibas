@@ -1,15 +1,17 @@
 "use client";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeBackground, changeTheme } from "@/redux/slices/canvas-slice";
 import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { cn } from "@/utils";
 
 const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
+  const { background, theme } = useSelector((state) => (state as any).canvas);
 
   return (
     <>
@@ -26,12 +28,17 @@ export default function Edit({ closePanel }: { closePanel: any }) {
         <NewCanvas className="rounded-md mx-auto my-8" />
         <h2 className="text-2xl my-4">الخلفية</h2>
         <div className="py-4 squares">
-          {backgrounds.map((background, index) => {
+          {backgrounds.map((_background, index) => {
             return (
               <span
                 key={index}
-                className={background}
-                onClick={() => dispatch(changeBackground(background))}
+                className={cn(
+                  _background,
+                  background == _background
+                    ? "outline border-2 border-white outline-[hsl(var(--primary))]"
+                    : ""
+                )}
+                onClick={() => dispatch(changeBackground(_background))}
               ></span>
             );
           })}
@@ -42,13 +49,23 @@ export default function Edit({ closePanel }: { closePanel: any }) {
         <h2 className="text-2xl my-4 mt-6">السمات</h2>
         <div className="py-4 squares">
           <span
-            className="bg-gray-400 flex justify-center items-center"
+            className={cn(
+              "bg-gray-200 flex border-2 border-white justify-center items-center",
+              theme == "quotation"
+                ? "outline m-1 outline-[hsl(var(--primary))]"
+                : ""
+            )}
             onClick={() => dispatch(changeTheme("quotation"))}
           >
             <Image src="/quote.png" alt="quote" width={60} height={60} />
           </span>
           <span
-            className="bg-gray-200 flex justify-center items-center"
+            className={cn(
+              "bg-gray-200 flex border-2 border-white justify-center items-center",
+              theme == "no-effect"
+                ? "outline m-1 outline-[hsl(var(--primary))]"
+                : ""
+            )}
             onClick={() => dispatch(changeTheme("no-effect"))}
           >
             لا تأثير
