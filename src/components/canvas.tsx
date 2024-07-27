@@ -12,7 +12,7 @@ function Quotation({ position }: { position: string }) {
   return (
     <Image
       alt="Quotation"
-      className={`invert absolute ${position}`}
+      className={`absolute ${position}`}
       src="/quote.png"
       width={60}
       height={60}

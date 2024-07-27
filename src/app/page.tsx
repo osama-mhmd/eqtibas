@@ -18,7 +18,6 @@ export default function Home() {
     if (!canvasRef.current) return;
 
     const canvas = await html2canvas(canvasRef.current, { scale: 15 });
-    console.log(canvasRef.current);
 
     // Download
     const link = document.createElement("a");
