@@ -22,6 +22,7 @@ const canvasSlice = createSlice({
   },
 });
 
-export const { writeQuote, changeBackground } = canvasSlice.actions;
+export const { writeQuote, changeBackground, changeTheme } =
+  canvasSlice.actions;
 
 export default canvasSlice.reducer;

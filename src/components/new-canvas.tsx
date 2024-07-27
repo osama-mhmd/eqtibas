@@ -6,14 +6,14 @@ import { forwardRef, HTMLAttributes } from "react";
 
 const NewCanvas = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
-    const { quote, background } = useSelector((state) => (state as any).canvas);
+    const { quote, background, theme } = useSelector((state) => (state as any).canvas);
 
     return (
       <Canvas
         background={background}
         ref={ref}
         quote={quote}
-        theme="quotation"
+        theme={theme}
         className={className}
         {...props}
       />
