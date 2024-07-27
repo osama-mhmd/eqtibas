@@ -1,13 +1,12 @@
 "use client";
 
-import Canvas from "./canvas";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeBackground } from "@/redux/slices/canvas-slice";
+import NewCanvas from "./new-canvas";
 
 const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
 
 export default function Edit({ closePanel }: { closePanel: any }) {
-  const { quote, background } = useSelector((state) => (state as any).canvas);
   const dispatch = useDispatch();
 
   return (
@@ -19,11 +18,7 @@ export default function Edit({ closePanel }: { closePanel: any }) {
             إغلاق
           </span>
         </div>
-        <Canvas
-          quote={quote}
-          background={background}
-          className="rounded-md mx-auto my-8"
-        />
+        <NewCanvas className="rounded-md mx-auto my-8" />
         <h2 className="text-2xl my-4">الخلفية</h2>
         <div className="py-4 squares">
           {backgrounds.map((_background, index) => {
@@ -39,6 +34,7 @@ export default function Edit({ closePanel }: { closePanel: any }) {
             مخصص
           </span>
         </div>
+        <h2 className="text-2xl my-4 mt-6">السمات</h2>
       </div>
       <div
         className="fixed w-full h-screen top-0 left-0 bg-gray-900 opacity-45 z-[7]"

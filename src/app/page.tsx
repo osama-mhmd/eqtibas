@@ -3,14 +3,13 @@
 
 import html2canvas from "html2canvas";
 import Gallery from "@/components/gallery";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { writeQuote } from "@/redux/slices/canvas-slice";
-import Canvas from "@/components/canvas";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Edit from "@/components/edit";
+import NewCanvas from "@/components/new-canvas";
 
 export default function Home() {
-  const { quote, background } = useSelector((state) => (state as any).canvas);
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
   const [isEditing, isEditingOrNot] = useState(false);
@@ -19,6 +18,7 @@ export default function Home() {
     if (!canvasRef.current) return;
 
     const canvas = await html2canvas(canvasRef.current, { scale: 15 });
+    console.log(canvasRef.current);
 
     // Download
     const link = document.createElement("a");
@@ -44,12 +44,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
             <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
-              <Canvas
-                background={background}
-                ref={canvasRef}
-                quote={quote}
-                theme="quotation"
-              />
+              <NewCanvas ref={canvasRef} />
               <span
                 className="absolute -top-8 left-0 cursor-pointer"
                 onClick={() => isEditingOrNot(true)}
