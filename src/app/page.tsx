@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import Edit from "@/components/edit";
 import NewCanvas from "@/components/new-canvas";
 import Image from "next/image";
+import { Pencil } from "lucide-react";
 
 export default function Home() {
   const canvasRef = useRef(null);
@@ -46,13 +47,13 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
-            <div className="p-2 rounded-md border-2 border-[hsl(var(--primary))] relative">
+            <div className="p-2 rounded-md border-2 relative">
               <NewCanvas ref={canvasRef} />
               <span
-                className="absolute -top-8 left-0 cursor-pointer"
+                className="absolute -top-2 -left-2 rounded-full p-3 bg-gray-300 shadow-md cursor-pointer"
                 onClick={() => isEditingOrNot(true)}
               >
-                تعديل
+                <Pencil />
               </span>
             </div>
 

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeBackground, changeTheme } from "@/redux/slices/canvas-slice";
 import NewCanvas from "./new-canvas";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
 
@@ -15,8 +16,11 @@ export default function Edit({ closePanel }: { closePanel: any }) {
       <div className="container absolute top-0 p-6 bg-white mx-auto sm:mt-8 sm:rounded-md z-10 shadow-gray-600">
         {/* Header */}
         <div className="flex justify-end">
-          <span onClick={closePanel} className="cursor-pointer text-blue-700">
-            إغلاق
+          <span
+            onClick={closePanel}
+            className="cursor-pointer rounded-full hover:bg-gray-200 p-2 bg-gray-100 transition"
+          >
+            <X />
           </span>
         </div>
         <NewCanvas className="rounded-md mx-auto my-8" />
