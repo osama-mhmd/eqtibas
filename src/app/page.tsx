@@ -8,6 +8,7 @@ import { writeQuote } from "@/redux/slices/canvas-slice";
 import { useRef, useState } from "react";
 import Edit from "@/components/edit";
 import NewCanvas from "@/components/new-canvas";
+import Image from "next/image";
 
 export default function Home() {
   const canvasRef = useRef(null);
@@ -30,7 +31,10 @@ export default function Home() {
     <main>
       <section className="mt-10">
         <div className="container mx-auto px-2">
-          <h1 className="text-center text-4xl mb-6">اقتباس</h1>
+          <h1 className="text-6xl mb-6 py-4 px-6 font-bold flex items-center justify-center">
+            اقتباس
+            <Image src={"/quill.png"} width={80} height={80} alt="quote" />
+          </h1>
           <div className="grid justify-center grid-cols-[repeat(1,minmax(300px,600px))] gap-4">
             <textarea
               onKeyUp={(e) => {
