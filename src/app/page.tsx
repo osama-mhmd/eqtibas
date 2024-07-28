@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import html2canvas from "html2canvas";
+import { toSvg } from "html-to-image";
 import Gallery from "@/components/gallery";
 import { useDispatch } from "react-redux";
 import { writeQuote } from "@/redux/slices/canvas-slice";
@@ -19,13 +19,16 @@ export default function Home() {
   const downloadImage = async () => {
     if (!canvasRef.current) return;
 
-    const canvas = await html2canvas(canvasRef.current, { scale: 15 });
-
-    // Download
-    const link = document.createElement("a");
-    link.download = "eqtibas.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    toSvg(canvasRef.current)
+      .then(function (dataUrl) {
+        var link = document.createElement("a");
+        link.download = "eqtibas.svg";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
   };
 
   return (
@@ -43,7 +46,6 @@ export default function Home() {
               }}
               id="textarea"
               placeholder="الاقتباس..."
-              // defaultValue={quote} * need to be fixed
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
