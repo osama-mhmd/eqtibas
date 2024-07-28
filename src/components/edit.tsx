@@ -6,7 +6,7 @@ import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { cn } from "@/utils";
-import ColorPicker from "./color-picker";
+// import AColorPicker from "./color-picker";
 import { useState } from "react";
 
 const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
@@ -43,7 +43,7 @@ export default function Edit({ closePanel }: { closePanel: any }) {
               ></span>
             );
           })}
-          <span
+          {/* <span
             className={cn(
               "bg-gray-200 flex justify-center items-center relative",
               backgrounds.indexOf(background) == -1 && "active-slot"
@@ -53,8 +53,8 @@ export default function Edit({ closePanel }: { closePanel: any }) {
             مخصص
           </span>
           {isPickingColor && (
-            <ColorPicker closePanel={() => makePickingColor(false)} />
-          )}
+            <AColorPicker closePanel={() => makePickingColor(false)} />
+          )} */}
         </div>
         <h2 className="text-2xl my-4 mt-6">السمات</h2>
         <div className="py-4 squares">
