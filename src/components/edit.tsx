@@ -6,11 +6,14 @@ import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { cn } from "@/utils";
+import ColorPicker from "./color-picker";
+import { useState } from "react";
 
 const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
+  const [isPickingColor, makePickingColor] = useState(false);
   const { background, theme } = useSelector((state) => (state as any).canvas);
 
   return (
@@ -27,33 +30,38 @@ export default function Edit({ closePanel }: { closePanel: any }) {
         </div>
         <NewCanvas className="rounded-md mx-auto my-8" />
         <h2 className="text-2xl my-4">الخلفية</h2>
-        <div className="py-4 squares">
+        <div className="py-4 squares relative">
           {backgrounds.map((_background, index) => {
             return (
               <span
                 key={index}
                 className={cn(
                   _background,
-                  background == _background
-                    ? "outline border-2 border-white outline-[hsl(var(--primary))]"
-                    : ""
+                  background == _background && "active-slot"
                 )}
                 onClick={() => dispatch(changeBackground(_background))}
               ></span>
             );
           })}
-          <span className="bg-gray-200 flex justify-center items-center">
+          <span
+            className={cn(
+              "bg-gray-200 flex justify-center items-center relative",
+              backgrounds.indexOf(background) == -1 && "active-slot"
+            )}
+            onClick={() => makePickingColor(true)}
+          >
             مخصص
           </span>
+          {isPickingColor && (
+            <ColorPicker closePanel={() => makePickingColor(false)} />
+          )}
         </div>
         <h2 className="text-2xl my-4 mt-6">السمات</h2>
         <div className="py-4 squares">
           <span
             className={cn(
               "bg-gray-200 flex border-2 border-white justify-center items-center",
-              theme == "quotation"
-                ? "outline m-1 outline-[hsl(var(--primary))]"
-                : ""
+              theme == "quotation" && "active-slot"
             )}
             onClick={() => dispatch(changeTheme("quotation"))}
           >
@@ -62,9 +70,7 @@ export default function Edit({ closePanel }: { closePanel: any }) {
           <span
             className={cn(
               "bg-gray-200 flex border-2 border-white justify-center items-center",
-              theme == "no-effect"
-                ? "outline m-1 outline-[hsl(var(--primary))]"
-                : ""
+              theme == "no-effect" && "active-slot"
             )}
             onClick={() => dispatch(changeTheme("no-effect"))}
           >

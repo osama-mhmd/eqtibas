@@ -91,6 +91,11 @@ button:hover {
   border-radius: 0.25rem;
   cursor: pointer;
 }
-.default-background {
-  background-color: #333;
+.react-colorful {
+  position: absolute !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.active-slot {
+  @apply outline border-2 border-white outline-[hsl(var(--primary))];
 }

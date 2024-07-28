@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   quote: "",
-  background: "default-background", // #111
+  background: "bg-gray-800", // #111
   theme: "no-effect",
 };
 
