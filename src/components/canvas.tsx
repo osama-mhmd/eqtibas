@@ -37,9 +37,11 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
         className={cn(
           "w-[370px] sm:w-[440px] relative h-[320px] sm:h-[380px] text-xl text-white p-8 flex text-center justify-center items-center",
           className,
-          background,
           themes[theme]
         )}
+        style={{
+          backgroundColor: background,
+        }}
         {...props}
       >
         {theme == "quotation" && <Quotation position="top-10 right-10" />}

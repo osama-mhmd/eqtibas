@@ -6,10 +6,10 @@ import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { cn } from "@/utils";
-// import AColorPicker from "./color-picker";
+import AColorPicker from "./color-picker";
 import { useState } from "react";
 
-const backgrounds = ["bg-blue-600", "bg-red-600", "bg-gray-800"];
+const backgrounds = ["#2564eb", "#dc2828", "#1f2937"];
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
@@ -35,15 +35,17 @@ export default function Edit({ closePanel }: { closePanel: any }) {
             return (
               <span
                 key={index}
-                className={cn(
-                  _background,
-                  background == _background && "active-slot"
-                )}
-                onClick={() => dispatch(changeBackground(_background))}
+                className={background == _background ? "active-slot" : ""}
+                style={{
+                  backgroundColor: _background,
+                }}
+                onClick={() => {
+                  dispatch(changeBackground(_background));
+                }}
               ></span>
             );
           })}
-          {/* <span
+          <span
             className={cn(
               "bg-gray-200 flex justify-center items-center relative",
               backgrounds.indexOf(background) == -1 && "active-slot"
@@ -52,10 +54,10 @@ export default function Edit({ closePanel }: { closePanel: any }) {
           >
             مخصص
           </span>
-          {isPickingColor && (
-            <AColorPicker closePanel={() => makePickingColor(false)} />
-          )} */}
         </div>
+        {isPickingColor && (
+          <AColorPicker closePanel={() => makePickingColor(false)} />
+        )}
         <h2 className="text-2xl my-4 mt-6">السمات</h2>
         <div className="py-4 squares">
           <span
