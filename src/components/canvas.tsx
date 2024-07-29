@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { cn, hexToRgb, isBgColorDark } from "@/utils";
 import { forwardRef } from "react";
 import { type HTMLAttributes } from "react";
 import Image from "next/image";
@@ -35,12 +35,13 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
       <div
         ref={ref}
         className={cn(
-          "w-[370px] sm:w-[440px] relative h-[320px] sm:h-[380px] text-xl text-white p-8 flex text-center justify-center items-center",
+          "w-[370px] sm:w-[440px] relative h-[320px] sm:h-[380px] text-xl p-8 flex text-center justify-center items-center",
           className,
           themes[theme]
         )}
         style={{
           backgroundColor: background,
+          color: isBgColorDark(hexToRgb(background)) ? "#fff" : "#000",
         }}
         {...props}
       >
