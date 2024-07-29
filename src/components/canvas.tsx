@@ -2,6 +2,7 @@ import { cn, hexToRgb, isBgColorDark } from "@/utils";
 import { forwardRef } from "react";
 import { type HTMLAttributes } from "react";
 import Image from "next/image";
+import { families } from "@/app/families";
 
 const themes = {
   "no-effect": "",
@@ -25,11 +26,20 @@ interface CanvasProps extends HTMLAttributes<HTMLDivElement> {
   background: string;
   theme?: "no-effect" | "quotation";
   image?: string;
+  family?: "ibm" | "noto";
 }
 
 const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
   (
-    { quote, className = "", theme = "no-effect", background, image, ...props },
+    {
+      quote,
+      className = "",
+      theme = "no-effect",
+      background,
+      image,
+      family = "ibm",
+      ...props
+    },
     ref
   ) => {
     return (
@@ -38,7 +48,9 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
         className={cn(
           "w-[370px] sm:w-[440px] relative h-[320px] sm:h-[380px] text-xl p-8 flex text-center justify-center items-center",
           className,
-          themes[theme]
+          themes[theme],
+          families[family],
+          family == "noto" ? "leading-10" : ""
         )}
         style={{
           backgroundColor: background,

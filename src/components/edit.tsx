@@ -3,6 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeBackground,
+  changeFamily,
   changeImage,
   changeTheme,
 } from "@/redux/slices/canvas-slice";
@@ -19,11 +20,13 @@ const gradients = [
   "linear-gradient(to right, #002828, #002868)",
   "linear-gradient(to right, #1f2947, #1f29af)",
 ];
+const families = ["noto", "ibm"] as const;
+import { families as familiesClasses } from "@/app/families";
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
   const [isPickingColor, makePickingColor] = useState(false);
-  const { background, theme, image } = useSelector(
+  const { background, theme, image, family } = useSelector(
     (state) => (state as any).canvas
   );
 
@@ -105,6 +108,26 @@ export default function Edit({ closePanel }: { closePanel: any }) {
           >
             لا تأثير
           </span>
+        </div>
+        <h2 className="text-2xl my-4">الخط</h2>
+        <div className="py-4 rects">
+          {families.map((_family, index) => {
+            return (
+              <span
+                key={index}
+                className={cn(
+                  "bg-gray-200 flex border-2 border-white justify-center items-center",
+                  familiesClasses[_family],
+                  _family == family ? "active-slot" : ""
+                )}
+                onClick={() => {
+                  dispatch(changeFamily(_family));
+                }}
+              >
+                بسم الله الرحمن الرحيم
+              </span>
+            );
+          })}
         </div>
       </div>
       <div

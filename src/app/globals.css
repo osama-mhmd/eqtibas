@@ -81,13 +81,20 @@ button:hover {
   /* Grid common */
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
-.squares {
+.squares,
+.rects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 150px));
   gap: 0.5rem;
 }
 .squares > * {
   aspect-ratio: 1 / 1;
+}
+.rects > * {
+  padding: 0.75rem 0;
+}
+.squares > *,
+.rects > * {
   border-radius: 0.25rem;
   cursor: pointer;
 }
