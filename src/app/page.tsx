@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { toSvg } from "html-to-image";
+import { toPng } from "html-to-image";
 import Gallery from "@/components/gallery";
 import { useDispatch } from "react-redux";
 import { writeQuote } from "@/redux/slices/canvas-slice";
@@ -19,10 +19,10 @@ export default function Home() {
   const downloadImage = async () => {
     if (!canvasRef.current) return;
 
-    toSvg(canvasRef.current)
+    toPng(canvasRef.current)
       .then(function (dataUrl) {
         var link = document.createElement("a");
-        link.download = "eqtibas.svg";
+        link.download = "eqtibas.png";
         link.href = dataUrl;
         link.click();
       })
