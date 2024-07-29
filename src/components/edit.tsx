@@ -1,7 +1,11 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { changeBackground, changeTheme } from "@/redux/slices/canvas-slice";
+import {
+  changeBackground,
+  changeImage,
+  changeTheme,
+} from "@/redux/slices/canvas-slice";
 import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -10,11 +14,18 @@ import AColorPicker from "./color-picker";
 import { useState } from "react";
 
 const backgrounds = ["#2564eb", "#dc2828", "#1f2937"];
+const gradients = [
+  "linear-gradient(to right, #2564eb, #f564eb)",
+  "linear-gradient(to right, #002828, #002868)",
+  "linear-gradient(to right, #1f2947, #1f29af)",
+];
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
   const [isPickingColor, makePickingColor] = useState(false);
-  const { background, theme } = useSelector((state) => (state as any).canvas);
+  const { background, theme, image } = useSelector(
+    (state) => (state as any).canvas
+  );
 
   return (
     <>
@@ -48,12 +59,28 @@ export default function Edit({ closePanel }: { closePanel: any }) {
           <span
             className={cn(
               "bg-gray-200 flex justify-center items-center relative",
-              backgrounds.indexOf(background) == -1 && "active-slot"
+              backgrounds.indexOf(background) == -1 &&
+                !image.length &&
+                "active-slot"
             )}
             onClick={() => makePickingColor(true)}
           >
             مخصص
           </span>
+          {gradients.map((gradient, index) => {
+            return (
+              <span
+                key={index}
+                className={image == gradient ? "active-slot" : ""}
+                style={{
+                  backgroundImage: gradient,
+                }}
+                onClick={() => {
+                  dispatch(changeImage(gradient));
+                }}
+              ></span>
+            );
+          })}
         </div>
         {isPickingColor && (
           <AColorPicker closePanel={() => makePickingColor(false)} />

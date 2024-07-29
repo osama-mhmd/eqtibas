@@ -24,11 +24,12 @@ interface CanvasProps extends HTMLAttributes<HTMLDivElement> {
   quote: string;
   background: string;
   theme?: "no-effect" | "quotation";
+  image?: string;
 }
 
 const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
   (
-    { quote, className = "", theme = "no-effect", background, ...props },
+    { quote, className = "", theme = "no-effect", background, image, ...props },
     ref
   ) => {
     return (
@@ -41,6 +42,7 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
         )}
         style={{
           backgroundColor: background,
+          backgroundImage: image,
           color: isBgColorDark(hexToRgb(background)) ? "#fff" : "#000",
         }}
         {...props}

@@ -4,6 +4,7 @@ const initialState = {
   quote: "",
   background: "#333333",
   theme: "no-effect",
+  image: "", // background-image
 };
 
 const canvasSlice = createSlice({
@@ -15,14 +16,19 @@ const canvasSlice = createSlice({
     },
     changeBackground: (state, action) => {
       state.background = action.payload;
+      state.image = "";
     },
     changeTheme: (state, action) => {
       state.theme = action.payload;
     },
+    changeImage: (state, action) => {
+      state.image = action.payload;
+      state.background = "";
+    },
   },
 });
 
-export const { writeQuote, changeBackground, changeTheme } =
+export const { writeQuote, changeBackground, changeTheme, changeImage } =
   canvasSlice.actions;
 
 export default canvasSlice.reducer;
