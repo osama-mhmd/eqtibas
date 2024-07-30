@@ -19,7 +19,7 @@ export default function New() {
   const downloadImage = async () => {
     if (!canvasRef.current) return;
 
-    toPng(canvasRef.current)
+    toPng(canvasRef.current, { style: { borderRadius: "0" } })
       .then(function (dataUrl) {
         var link = document.createElement("a");
         link.download = "eqtibas.png";
@@ -45,10 +45,10 @@ export default function New() {
             />
           </div>
           <div className="flex flex-col justify-center items-center m-12 gap-6">
-            <div className="p-2 rounded-md border-2 relative">
-              <NewCanvas ref={canvasRef} />
+            <div className="relative">
+              <NewCanvas className="rounded-md" ref={canvasRef} />
               <span
-                className="absolute -top-2 -left-2 rounded-full p-3 bg-gray-300 shadow-md cursor-pointer"
+                className="absolute -top-4 -left-4 rounded-full p-3 bg-gray-300 shadow-md cursor-pointer"
                 onClick={() => isEditingOrNot(true)}
               >
                 <Pencil />
