@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+/* imports */
+@import url("./custom.css");
 
-@media (prefers-color-scheme: dark) { */
 :root {
   --background: 0 0% 100%;
   --foreground: 224 71.4% 4.1%;
@@ -30,8 +26,8 @@
   --input: 220 13% 91%;
   --ring: 262.1 83.3% 57.8%;
 }
-/* } */
 
+/* scroll bar */
 ::-webkit-scrollbar {
   background-color: transparent;
   width: 10px;
@@ -76,33 +72,4 @@ button {
 }
 button:hover {
   background-color: hsl(var(--primary) / 0.9);
-}
-.gc {
-  /* Grid common */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-.squares,
-.rects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 150px));
-  gap: 0.5rem;
-}
-.squares > * {
-  aspect-ratio: 1 / 1;
-}
-.rects > * {
-  padding: 0.75rem 0;
-}
-.squares > *,
-.rects > * {
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-.react-colorful {
-  position: absolute !important;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.active-slot {
-  @apply outline border-2 border-white outline-[hsl(var(--primary))];
 }

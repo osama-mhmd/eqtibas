@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 import ReduxProvider from "@/redux/redux-provider";
 
 const ibm = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
