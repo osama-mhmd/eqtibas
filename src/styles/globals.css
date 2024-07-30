@@ -63,13 +63,15 @@ input:focus,
 textarea:focus {
   outline-color: hsl(var(--input));
 }
-button {
+button,
+.as-button {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   transition: 0.3s all;
 }
-button:hover {
+button:hover,
+.as-button:hover {
   background-color: hsl(var(--primary) / 0.9);
 }
