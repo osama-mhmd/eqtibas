@@ -20,8 +20,9 @@ const gradients = [
   "linear-gradient(to right, #002828, #002868)",
   "linear-gradient(to right, #1f2947, #1f29af)",
 ];
-const families = ["noto", "ibm"] as const;
-import { families as familiesClasses } from "@/app/families";
+
+import { families as fontFamilies } from "@/app/families";
+const families = Object.keys(fontFamilies);
 
 export default function Edit({ closePanel }: { closePanel: any }) {
   const dispatch = useDispatch();
@@ -117,7 +118,7 @@ export default function Edit({ closePanel }: { closePanel: any }) {
                 key={index}
                 className={cn(
                   "bg-gray-200 flex border-2 border-white justify-center items-center",
-                  familiesClasses[_family],
+                  fontFamilies[_family as keyof typeof fontFamilies],
                   _family == family ? "active-slot" : ""
                 )}
                 onClick={() => {

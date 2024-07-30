@@ -26,7 +26,7 @@ interface CanvasProps extends HTMLAttributes<HTMLDivElement> {
   background: string;
   theme?: "no-effect" | "quotation";
   image?: string;
-  family?: "ibm" | "noto";
+  family?: keyof typeof families;
 }
 
 const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
@@ -50,7 +50,8 @@ const Canvas = forwardRef<HTMLDivElement, CanvasProps>(
           className,
           themes[theme],
           families[family],
-          family == "noto" ? "leading-10" : ""
+          family == "noto" ? "leading-10" : "",
+          family != "noto" ? "text-2xl" : ""
         )}
         style={{
           backgroundColor: background,
