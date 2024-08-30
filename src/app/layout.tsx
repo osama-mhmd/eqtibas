@@ -16,7 +16,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={ibm.className}>{children}</body>
+      <body className={ibm.className}>
+        {children}
+        <footer className="bg-gray-100 border-t border-t-gray-400">
+          <div className="py-10 container mx-auto text-center px-2">
+            صنع بواسطة{" "}
+            <a
+              className="underline text-blue-800"
+              href="https://os-mhmd.vercel.app"
+            >
+              أسامة محمد
+            </a>{" "}
+            &copy; 2024
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }

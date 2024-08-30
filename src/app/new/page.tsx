@@ -63,20 +63,6 @@ export default function New() {
         </div>
       </section>
       <Gallery />
-      <footer>
-        <div className="py-10 container mx-auto text-center px-2">
-          <hr />
-          <br />
-          صنع بواسطة{" "}
-          <a
-            className="underline text-blue-800"
-            href="https://os-mhmd.vercel.app"
-          >
-            أسامة محمد
-          </a>{" "}
-          - 2024
-        </div>
-      </footer>
     </main>
   );
 }
