@@ -11,7 +11,6 @@ import NewCanvas from "./new-canvas";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { cn } from "@/utils";
-import AColorPicker from "./color-picker";
 import { useState } from "react";
 
 const backgrounds = ["#2564eb", "#dc2828", "#1f2937"];
@@ -67,9 +66,22 @@ export default function Edit({ closePanel }: { closePanel: any }) {
                 !image.length &&
                 "active-slot"
             )}
-            onClick={() => makePickingColor(true)}
+            onClick={() => {
+              const colorInput: HTMLInputElement | null =
+                document.querySelector("#custom-color");
+
+              colorInput?.click();
+            }}
           >
             مخصص
+            <input
+              type="color"
+              className="absolute -z-10"
+              id="custom-color"
+              onChange={(e) =>
+                dispatch(changeBackground(e.currentTarget.value))
+              }
+            />
           </span>
           {gradients.map((gradient, index) => {
             return (
@@ -86,9 +98,6 @@ export default function Edit({ closePanel }: { closePanel: any }) {
             );
           })}
         </div>
-        {isPickingColor && (
-          <AColorPicker closePanel={() => makePickingColor(false)} />
-        )}
         <h2 className="text-2xl my-4 mt-6">السمات</h2>
         <div className="py-4 squares">
           <span
