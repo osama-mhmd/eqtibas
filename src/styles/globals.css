@@ -43,6 +43,7 @@ body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 @layer utilities {
