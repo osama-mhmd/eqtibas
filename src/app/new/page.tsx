@@ -78,9 +78,14 @@ export default function New() {
                 <div className="flex gap-1 items-center mt-4 py-2 border-t border-t-gray-400 pt-6">
                   <label>صيغة التحميل:</label>
                   <div className="custom-select">
-                    <select defaultValue="png">
+                    <select
+                      defaultValue={fileExtension}
+                      onChange={(e) =>
+                        setFileExtension(e.target.value as AvailableExtensions)
+                      }
+                    >
                       <option value="png">PNG</option>
-                      <option value="SVG">SVG</option>
+                      <option value="svg">SVG</option>
                     </select>
                   </div>
                 </div>
