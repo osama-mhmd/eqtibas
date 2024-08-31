@@ -12,15 +12,6 @@ import { Bolt, Pencil } from "lucide-react";
 
 type AvailableExtensions = "png" | "svg";
 
-import {
-  Select,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-} from "@/components/ui/select";
-
 export default function New() {
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
@@ -77,30 +68,23 @@ export default function New() {
             {isEditing && <Edit closePanel={() => isEditingOrNot(false)} />}
 
             <div className="w-[370px] sm:w-[440px] mx-auto">
-              <div className="py-2 mb-4 flex justify-between">
-                <h3 className="text-lg">إعدادات التحميل</h3>
-                <Bolt />
-              </div>
-              <div className="flex gap-1 items-center">
-                <label>صيغة التحميل:</label>
-                <Select
-                  onValueChange={(extension) =>
-                    setFileExtension(extension as AvailableExtensions)
-                  }
-                  dir="rtl"
-                  defaultValue={fileExtension}
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="اختر صيغة التحميل" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectGroup>
-                      <SelectItem value="svg">SVG</SelectItem>
-                      <SelectItem value="png">PNG</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
+              <details className="bg-gray-100 rounded-lg p-4 border border-gray-400">
+                <summary className="list-none cursor-pointer">
+                  <div className="flex justify-between">
+                    <h3 className="text-lg">إعدادات التحميل</h3>
+                    <Bolt className="rotate-0 transition" />
+                  </div>
+                </summary>
+                <div className="flex gap-1 items-center mt-4 py-2 border-t border-t-gray-400 pt-6">
+                  <label>صيغة التحميل:</label>
+                  <div className="custom-select">
+                    <select defaultValue="png">
+                      <option value="png">PNG</option>
+                      <option value="SVG">SVG</option>
+                    </select>
+                  </div>
+                </div>
+              </details>
             </div>
 
             <button onClick={downloadImage}>تحميل</button>
