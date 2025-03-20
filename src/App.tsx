@@ -51,12 +51,11 @@ const moodEmojis = {
   book: ["📚"],
 };
 
-const moodPositions = {
-  happy: { min: 20, max: 80 },
-  sad: { min: 20, max: 80 },
-  wise: { min: 20, max: 80 },
-  book: { min: 70, max: 90 }, // Bottom right corner only
-};
+// const moodPositions = {
+//   happy: { min: 20, max: 80 },
+//   sad: { min: 20, max: 80 },
+//   wise: { min: 20, max: 80 },
+// };
 
 const quoteLayouts: Record<
   QuoteLayout,
@@ -140,7 +139,16 @@ function App() {
           moodEmojis[selectedMood][
             Math.floor(Math.random() * moodEmojis[selectedMood].length)
           ];
-        const pos = moodPositions[selectedMood];
+        const pos = { min: 20, max: 80 };
+        const leftPos =
+          Math.random() < 0.5
+            ? pos.min + Math.random() * (pos.max - pos.min) // Left side
+            : 100 - (pos.min + Math.random() * (pos.max - pos.min)); // Right side
+
+        const topPos =
+          Math.random() < 0.5
+            ? pos.min + Math.random() * (pos.max - pos.min) // Top side
+            : 100 - (pos.min + Math.random() * (pos.max - pos.min)); // Bottom side
         if (count == 1) {
           return {
             emoji,
@@ -158,10 +166,9 @@ function App() {
           emoji,
           style: {
             position: "absolute",
-            left: `${pos.min + Math.random() * (pos.max - pos.min)}%`,
-            top: `${pos.min + Math.random() * (pos.max - pos.min)}%`,
-            transform: `rotate(${Math.random() * 360}deg)`,
-            opacity: 0.6,
+            left: `${leftPos}%`,
+            top: `${topPos}%`,
+            opacity: 0.3,
             fontSize: `${2 + Math.random()}rem`,
             zIndex: 1,
           } as React.CSSProperties,
