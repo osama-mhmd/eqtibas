@@ -230,8 +230,15 @@ function App() {
         >
           <div className="flex items-center justify-between">
             <h1 className="flex items-center gap-2 text-3xl font-bold">
-              <Quote className="w-8 h-8 text-purple-500" />
-              Quote Generator
+              <Quote
+                fill="currentColor"
+                stroke="#9333ea"
+                className="w-8 h-8 text-purple-200 dark:text-purple-500"
+              />
+              Eqtibas{" "}
+              <span className="text-xl italic text-gray-500">
+                Quote Generator
+              </span>
             </h1>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
